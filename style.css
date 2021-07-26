@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+  }
+body {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #CCFFE5;
+    color: black;
+    height: 100vh;
+    margin:0;
+
+}
+
+.weather {
+    border-style: solid;
+    border:black;
+    border-radius: 20px;
+}
