@@ -22,7 +22,7 @@ function getWeather(cityName) {
 // ask for user input
 function getUserInput(event){
   event.preventDefault();
-  var cityName=document.querySelector("").value;
+  var cityName=document.querySelector("userInput").value;
   getWeather(cityName);
 }
 
