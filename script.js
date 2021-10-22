@@ -1,33 +1,44 @@
-var searchBtn = document.getElementById("search");
-var apikey = "11dc52a95fa797bda83ead455ac98597";
+const apikey = "11dc52a95fa797bda83ead455ac98597";
+const city = "los angeles";
 
-// function displayWeather(data) {
-//   console.log(data)
-//   var cityName = document.getElementById("city").value;
-//   console.log(cityName);
-//   // cityName = data.name;
-// };
 
 //make the API call for searched city
-function getWeather(cityName) {
-  console.log(cityName);
-  var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + "bellflower" + "&units=imperial&appid=" + apikey
-  fetch(weatherUrl).then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    // console.log(data); displayWeather(data)
-  })
-};
-
-// ask for user input
-function getUserInput(event){
-  event.preventDefault();
-  var cityName=document.querySelector("userInput").value;
-  getWeather(cityName);
+async function getWeatherByCity(city){
+	const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=imperial`;
+  	const res = await fetch(url);
+  	const json = await res.json();
+  	const cityName = json.name;
+  	handleStorage(cityName);
+  	displayWeatherData(json);
 }
 
+function displayWeatherData(json){
+	console.log(json);
+  	const lat = json.coord.lat;
+  	const lon = json.coord.lon;
+  	const description = json.weather[0].description;
+  	const icon = json.weather[0].icon;
+  	const imageSRC = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  	const img = document.createElement("img");
+  	img.src = imageSRC;
+  	document.body.append(img);
+  	getForecastByLatLon(lat, lon);
+}
 
-searchBtn.addEventListener("click", getWeather)
+async function getForecastByLatLon(lat, lon){
+	const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apikey}`;
+  	const res = await fetch(url);
+  	const json = await res.json();
+  	displayForecastData(json);
+}
+
+function displayForecastData(json){
+	console.log(json);
+  	const currentUVI = json.current.uvi;
+}
+
+function handleStorage(cityName){}
+getWeatherByCity();
 
 
 
