@@ -12,6 +12,7 @@ async function getWeatherByCity(city){
   	displayWeatherData(json);
 }
 
+// display the weather info
 function displayWeatherData(json){
 	console.log(json);
   	const lat = json.coord.lat;
@@ -25,6 +26,7 @@ function displayWeatherData(json){
   	getForecastByLatLon(lat, lon);
 }
 
+// get lat and lon for forecast
 async function getForecastByLatLon(lat, lon){
 	const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apikey}`;
   	const res = await fetch(url);
