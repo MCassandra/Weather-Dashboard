@@ -1,6 +1,5 @@
 const apikey = "11dc52a95fa797bda83ead455ac98597";
-const city = "los angeles";
-
+const city = "los+angeles";
 
 //make the API call for searched city
 async function getWeatherByCity(city){
